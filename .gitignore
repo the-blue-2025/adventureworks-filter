@@ -97,4 +97,7 @@ jspm_packages/
 .tern-port
 
 # Angular build output
-.angular
+frontend/.angular
+frontend/dist/
+frontend/out-tsc/
+frontend/.angular/cache/
