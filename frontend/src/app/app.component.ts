@@ -14,12 +14,14 @@ export class AppComponent implements OnInit {
   private _loading = signal<boolean>(false);
   private _currentSearchCriteria = signal<ProductSearchCriteria>({});
   private _error = signal<string | null>(null);
+  private _isSearchSectionCollapsed = signal<boolean>(true); // Default to collapsed
 
   // Readonly signals for template access
   searchResult = this._searchResult.asReadonly();
   loading = this._loading.asReadonly();
   currentSearchCriteria = this._currentSearchCriteria.asReadonly();
   error = this._error.asReadonly();
+  isSearchSectionCollapsed = this._isSearchSectionCollapsed.asReadonly();
 
   // Computed signals
   hasResults = computed(() => (this._searchResult()?.products.length ?? 0) > 0);
@@ -55,5 +57,13 @@ export class AppComponent implements OnInit {
 
   onClearSearch(): void {
     this.loadProducts();
+  }
+
+  showSearchSection(): void {
+    this._isSearchSectionCollapsed.set(false); // Show search section when button is clicked
+  }
+
+  onHideSearch(): void {
+    this._isSearchSectionCollapsed.set(true);
   }
 }

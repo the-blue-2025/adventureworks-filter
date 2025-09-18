@@ -11,33 +11,13 @@
       <button 
         type="button" 
         class="btn btn-outline-light btn-sm"
-        (click)="toggleCollapse()"
-        [attr.aria-expanded]="!isCollapsed()"
-        aria-controls="searchCollapse">
-        <i class="bi" [class.bi-chevron-up]="!isCollapsed()" [class.bi-chevron-down]="isCollapsed()"></i>
-        <span class="ms-1">{{ isCollapsed() ? 'Show' : 'Hide' }}</span>
+        (click)="onHideSearch()">
+        <i class="bi bi-eye-slash me-1"></i>
+        Hide
       </button>
     </div>
   </div>
-  <!-- Quick Search Summary (shown when collapsed) -->
-  <div *ngIf="isCollapsed() && hasSearchCriteria()" class="card-body py-2">
-    <div class="d-flex align-items-center text-muted">
-      <i class="bi bi-funnel me-2"></i>
-      <small>
-        <strong>Active filters:</strong>
-        <span *ngIf="searchForm.get('name')?.value" class="badge bg-secondary me-1">Name: {{ searchForm.get('name')?.value }}</span>
-        <span *ngIf="searchForm.get('productNumber')?.value" class="badge bg-secondary me-1">Number: {{ searchForm.get('productNumber')?.value }}</span>
-        <span *ngIf="searchForm.get('color')?.value" class="badge bg-secondary me-1">Color: {{ searchForm.get('color')?.value }}</span>
-        <span *ngIf="searchForm.get('productLine')?.value" class="badge bg-secondary me-1">Line: {{ searchForm.get('productLine')?.value }}</span>
-        <span *ngIf="searchForm.get('class')?.value" class="badge bg-secondary me-1">Class: {{ searchForm.get('class')?.value }}</span>
-        <span *ngIf="searchForm.get('style')?.value" class="badge bg-secondary me-1">Style: {{ searchForm.get('style')?.value }}</span>
-        <span *ngIf="searchForm.get('size')?.value" class="badge bg-secondary me-1">Size: {{ searchForm.get('size')?.value }}</span>
-      </small>
-    </div>
-  </div>
-
-  <div class="collapse" [class.show]="!isCollapsed()" id="searchCollapse">
-    <div class="card-body">
+  <div class="card-body">
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
       <!-- First Row -->
       <div class="row g-3 mb-3">
@@ -177,6 +157,5 @@
         </div>
       </div>
     </form>
-    </div>
   </div>
 </div>

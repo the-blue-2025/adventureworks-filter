@@ -7,10 +7,21 @@
           <i class="bi bi-shop me-3"></i>
           {{ title }}
         </h1>
-        <p class="lead text-muted mb-0">
+        <p class="lead text-muted mb-3">
           <i class="bi bi-database me-2"></i>
           Search and filter products from AdventureWorks database
         </p>
+        <!-- Search Toggle Button -->
+        <div class="d-flex justify-content-center">
+          <button 
+            *ngIf="isSearchSectionCollapsed()"
+            type="button" 
+            class="btn btn-outline-primary btn-lg px-4"
+            (click)="showSearchSection()">
+            <i class="bi bi-search me-2"></i>
+            Show Search
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -21,8 +32,10 @@
       <div class="col-12">
         <!-- Search Section -->
         <app-product-search
+          *ngIf="!isSearchSectionCollapsed()"
           (searchCriteria)="onSearch($event)"
-          (clearSearch)="onClearSearch()">
+          (clearSearch)="onClearSearch()"
+          (hideSearch)="onHideSearch()">
         </app-product-search>
 
         <!-- Error Alert -->

@@ -9,6 +9,7 @@ import { ProductSearchCriteria } from '../../models/product.model';
 export class ProductSearchComponent {
   @Output() searchCriteria = new EventEmitter<ProductSearchCriteria>();
   @Output() clearSearch = new EventEmitter<void>();
+  @Output() hideSearch = new EventEmitter<void>();
 
   searchForm: FormGroup;
   
@@ -21,9 +22,6 @@ export class ProductSearchComponent {
   
   private _activeFieldCount = signal(0);
   activeFieldCount = this._activeFieldCount.asReadonly();
-  
-  private _isCollapsed = signal(true);
-  isCollapsed = this._isCollapsed.asReadonly();
 
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({
@@ -82,8 +80,7 @@ export class ProductSearchComponent {
     return this.activeFieldCount();
   });
 
-  // Toggle collapse state
-  toggleCollapse(): void {
-    this._isCollapsed.set(!this._isCollapsed());
+  onHideSearch(): void {
+    this.hideSearch.emit();
   }
 }
